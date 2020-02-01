@@ -7,15 +7,15 @@ let restaurant = {
 
     return guestSeat <= seat;
   },
-  seatParty: function(seat) {
-    this.guestCount = seat;
+  seatParty: function(partySize) {
+    this.guestCount = this.guestCount + partySize;
   },
-  removeParty: function() {
-    this.guestCount = 0;
+  removeParty: function(partySize) {
+    this.guestCount = this.guestCount - partySize;
   }
 };
 
 restaurant.seatParty(68);
 console.log(restaurant.isAvailableSeat(5));
-restaurant.removeParty();
+restaurant.removeParty(5);
 console.log(restaurant.isAvailableSeat(5));
