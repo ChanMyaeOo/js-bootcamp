@@ -17,7 +17,7 @@ const todos = [
   },
   {
     text: 'Exercise',
-    completed: true
+    completed: false
   }
 ];
 
@@ -34,7 +34,22 @@ const getTodoThings = todos => {
   }));
 };
 
+const sortTodos = todos => {
+  todos.sort((a, b) => {
+    // if (b.completed < a.completed) {
+    //   return 1;
+    // }
+
+    if (!a.completed && b.completed) return -1;
+    else if (!b.completed && a.completed) return 1;
+    else return 0;
+  });
+};
+
 // deleteTodo(todos, 'exercise');
 // console.log(todos);
 
-console.log(getTodoThings(todos));
+// console.log(getTodoThings(todos));
+
+sortTodos(todos);
+console.log(todos);
