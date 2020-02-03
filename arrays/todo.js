@@ -9,11 +9,11 @@ const todos = [
   },
   {
     text: 'Do coding',
-    completed: true
+    completed: false
   },
   {
     text: 'Finish Project',
-    completed: false
+    completed: true
   },
   {
     text: 'Exercise',
@@ -28,5 +28,13 @@ const deleteTodo = (todos, text) => {
   if (index > -1) todos.splice(index, 1);
 };
 
-deleteTodo(todos, 'exercise');
-console.log(todos);
+const getTodoThings = todos => {
+  return (result = todos.filter(todo => {
+    return todo.completed === false;
+  }));
+};
+
+// deleteTodo(todos, 'exercise');
+// console.log(todos);
+
+console.log(getTodoThings(todos));
