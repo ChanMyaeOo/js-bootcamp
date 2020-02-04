@@ -22,10 +22,9 @@ const todos = [
 ];
 
 const elements = {
-  body: document.querySelector('body'),
-  button: document.getElementById('add-todo'),
   input: document.querySelector('#search-todo'),
-  todosWrap: document.querySelector('#todos-wrap')
+  todosWrap: document.querySelector('#todos-wrap'),
+  todoForm: document.querySelector('#todo-form')
 };
 
 const getUncompleted = function(filteredList) {
@@ -60,13 +59,21 @@ const showTodos = function(todoList, filters) {
 
 showTodos(todos, filter.filterText);
 
-// Haldle click event
-elements.button.addEventListener('click', e => {
-  console.log(e.target.textContent);
-});
-
 // Handle input change
 elements.input.addEventListener('input', e => {
   filter.filterText = e.target.value;
   showTodos(todos, filter.filterText);
+});
+
+// Handle form submit
+elements.todoForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  todos.push({
+    text: e.target.elements.newTodo.value,
+    completed: false
+  });
+
+  showTodos(todos, filter.filterText);
+  e.target.elements.newTodo.value = '';
 });
