@@ -40,8 +40,12 @@ const filter = {
 };
 
 const showTodos = function(todoList, filters) {
-  let filterList = todoList.filter(el => {
-    return el.text.toLowerCase().includes(filters.toLowerCase());
+  const filterList = todoList.filter(el => {
+    const searchTextMatch = el.text
+      .toLowerCase()
+      .includes(filters.filterText.toLowerCase());
+    const hideCompletedMatch = !filters.hideCompleted || !el.completed;
+    return searchTextMatch && hideCompletedMatch;
   });
 
   elements.todosWrap.innerHTML = '';
@@ -59,12 +63,12 @@ const showTodos = function(todoList, filters) {
   });
 };
 
-showTodos(todos, filter.filterText);
+showTodos(todos, filter);
 
 // Handle input change
 elements.input.addEventListener('input', e => {
   filter.filterText = e.target.value;
-  showTodos(todos, filter.filterText);
+  showTodos(todos, filter);
 });
 
 // Handle form submit
@@ -76,12 +80,12 @@ elements.todoForm.addEventListener('submit', e => {
     completed: false
   });
 
-  showTodos(todos, filter.filterText);
+  showTodos(todos, filter);
   e.target.elements.newTodo.value = '';
 });
 
 // Handle checkbox change
 elements.showUncompleted.addEventListener('change', e => {
   filter.hideCompleted = e.target.checked;
-  console.log(filter.hideCompleted);
+  showTodos(todos, filter);
 });
