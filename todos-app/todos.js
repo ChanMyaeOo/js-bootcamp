@@ -1,25 +1,9 @@
-const todos = [
-  {
-    text: 'Read Book',
-    completed: true
-  },
-  {
-    text: 'Watch Tutorials',
-    completed: true
-  },
-  {
-    text: 'Do coding',
-    completed: false
-  },
-  {
-    text: 'Finish Project',
-    completed: true
-  },
-  {
-    text: 'Exercise',
-    completed: false
-  }
-];
+let todos = [];
+
+const todosJSON = localStorage.getItem('todos');
+if (todosJSON !== null) {
+  todos = JSON.parse(todosJSON);
+}
 
 const elements = {
   input: document.querySelector('#search-todo'),
@@ -80,6 +64,7 @@ elements.todoForm.addEventListener('submit', e => {
     completed: false
   });
 
+  localStorage.setItem('todos', JSON.stringify(todos));
   showTodos(todos, filter);
   e.target.elements.newTodo.value = '';
 });
