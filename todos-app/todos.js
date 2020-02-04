@@ -24,7 +24,8 @@ const todos = [
 const elements = {
   input: document.querySelector('#search-todo'),
   todosWrap: document.querySelector('#todos-wrap'),
-  todoForm: document.querySelector('#todo-form')
+  todoForm: document.querySelector('#todo-form'),
+  showUncompleted: document.querySelector('#show-uncompleted')
 };
 
 const getUncompleted = function(filteredList) {
@@ -34,11 +35,12 @@ const getUncompleted = function(filteredList) {
 };
 
 const filter = {
-  filterText: ''
+  filterText: '',
+  hideCompleted: false
 };
 
 const showTodos = function(todoList, filters) {
-  const filterList = todoList.filter(el => {
+  let filterList = todoList.filter(el => {
     return el.text.toLowerCase().includes(filters.toLowerCase());
   });
 
@@ -76,4 +78,10 @@ elements.todoForm.addEventListener('submit', e => {
 
   showTodos(todos, filter.filterText);
   e.target.elements.newTodo.value = '';
+});
+
+// Handle checkbox change
+elements.showUncompleted.addEventListener('change', e => {
+  filter.hideCompleted = e.target.checked;
+  console.log(filter.hideCompleted);
 });
