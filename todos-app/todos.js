@@ -41,9 +41,25 @@ const showTodos = function(todoList, filters) {
   elements.todosWrap.appendChild(paragraph);
 
   filterList.forEach(todo => {
-    const newParagraph = document.createElement('p');
+    const newParagraph = document.createElement('span');
+    const todoEl = document.createElement('div');
+    const button = document.createElement('button');
+    const checkbox = document.createElement('input');
+
+    // Set up checkbox
+    checkbox.setAttribute('type', 'checkbox');
+    todoEl.appendChild(checkbox);
+
+    // Set up new todo
     newParagraph.textContent = todo.text;
-    elements.todosWrap.appendChild(newParagraph);
+    todoEl.appendChild(newParagraph);
+
+    // Set up remove btn
+    button.textContent = 'x';
+    todoEl.appendChild(button);
+
+    // Set up todoEl to the div container
+    elements.todosWrap.appendChild(todoEl);
   });
 };
 
