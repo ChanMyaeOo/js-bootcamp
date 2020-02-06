@@ -1,5 +1,5 @@
-let calcGrade = function(studentScore, possibleScore) {
-  let scorePercent = (studentScore / possibleScore) * 100;
+const calcGrade = function(studentScore, possibleScore) {
+  const scorePercent = (studentScore / possibleScore) * 100;
   let studentGrade;
   if (scorePercent >= 90) studentGrade = 'A';
   else if (scorePercent >= 80) studentGrade = 'B';
@@ -10,5 +10,5 @@ let calcGrade = function(studentScore, possibleScore) {
   return `You got a ${studentGrade} (${scorePercent}%)!`;
 };
 
-let result = calcGrade(63, 100);
+const result = calcGrade(63, 100);
 console.log(result);
