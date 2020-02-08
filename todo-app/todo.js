@@ -1,56 +1,8 @@
-let todos = [
-  {
-    text: 'read books',
-    completed: false
-  },
-  {
-    text: 'learn javascript',
-    completed: true
-  },
-  {
-    text: 'contribute open source',
-    completed: false
-  },
-  {
-    text: 'clean the room',
-    completed: true
-  },
-  {
-    text: 'do exercise',
-    completed: false
-  }
-];
+const todos = getSavedTodos();
 
 const filters = {
   searchText: '',
   hideCompleted: false
-};
-
-const renderTodos = function(todos, filter) {
-  const filteredTodos = todos.filter(function(todo) {
-    const isSearchTextMatch = todo.text
-      .toLowerCase()
-      .includes(filter.searchText.toLowerCase());
-    const isHideCompletedMatch = !filter.hideCompleted || !todo.completed;
-    return isSearchTextMatch && isHideCompletedMatch;
-  });
-
-  const uncompletedTodos = filteredTodos.filter(function(todo) {
-    return !todo.completed;
-  });
-
-  // clear todo container (#todos) before rendering filtered todos
-  document.querySelector('#todos').innerHTML = '';
-
-  const todoSummary = document.createElement('h3');
-  todoSummary.textContent = `You have ${uncompletedTodos.length} todos left`;
-  document.querySelector('#todos').appendChild(todoSummary);
-
-  filteredTodos.forEach(function(todo) {
-    const paragraph = document.createElement('p');
-    paragraph.textContent = todo.text;
-    document.querySelector('#todos').appendChild(paragraph);
-  });
 };
 
 renderTodos(todos, filters);
@@ -68,6 +20,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(e) {
     text: e.target.elements.todoInput.value,
     completed: false
   });
+  saveTodos(todos);
   renderTodos(todos, filters);
   e.target.elements.todoInput.value = '';
 });
