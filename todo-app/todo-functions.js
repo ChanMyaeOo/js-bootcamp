@@ -13,6 +13,28 @@ const saveTodos = function(todos) {
   localStorage.setItem('todos', JSON.stringify(todos));
 };
 
+// Remove todo from the list
+const removeTodo = function(id) {
+  const todoIndex = todos.findIndex(function(todo) {
+    return todo.id === id;
+  });
+
+  if (todoIndex > -1) {
+    todos.splice(todoIndex, 1);
+  }
+};
+
+// Toggle todo -> Completed OR Uncompleted
+const toggleTodo = function(id) {
+  const todo = todos.find(function(todo) {
+    return todo.id === id;
+  });
+
+  if (todo !== undefined) {
+    todo.completed = !todo.completed;
+  }
+};
+
 // Generate todo DOM
 const generateTodoDOM = function(todo) {
   const todoEl = document.createElement('div');
@@ -23,6 +45,14 @@ const generateTodoDOM = function(todo) {
   toggleCheckbox.setAttribute('type', 'checkbox');
   todoEl.appendChild(toggleCheckbox);
 
+  // Handle checkbox toggle
+  toggleCheckbox.checked = todo.completed;
+  toggleCheckbox.addEventListener('change', function(e) {
+    toggleTodo(todo.id);
+    saveTodos(todos);
+    renderTodos(todos, filters);
+  });
+
   // Setup note
   const paragraph = document.createElement('span');
   paragraph.textContent = todo.text;
@@ -31,6 +61,13 @@ const generateTodoDOM = function(todo) {
   // Setup remove note button
   removeTodoBtn.textContent = 'x';
   todoEl.appendChild(removeTodoBtn);
+
+  // Handle remove note
+  removeTodoBtn.addEventListener('click', function() {
+    removeTodo(todo.id);
+    saveTodos(todos);
+    renderTodos(todos, filters);
+  });
 
   return todoEl;
 };

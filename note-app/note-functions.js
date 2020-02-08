@@ -14,14 +14,32 @@ const saveNote = function(notes) {
   localStorage.setItem('notes', JSON.stringify(notes));
 };
 
+// Remove note from the list
+const removeNote = function(id) {
+  const noteIndex = notes.findIndex(function(note) {
+    return note.id === id;
+  });
+  if (noteIndex > -1) {
+    notes.splice(noteIndex, 1);
+  }
+};
+
 // Generate DOM for new note
 const generateNoteDOM = function(note) {
   const noteEl = document.createElement('div');
   const paragraph = document.createElement('span');
   const removeBtn = document.createElement('button');
 
+  // Setup remove note button
   removeBtn.textContent = 'x';
   noteEl.appendChild(removeBtn);
+
+  removeBtn.addEventListener('click', function() {
+    // console.log(note.id);
+    removeNote(note.id);
+    saveNote(notes);
+    renderNotes(notes, filters);
+  });
 
   if (note.title.length > 0) {
     paragraph.textContent = note.title;
