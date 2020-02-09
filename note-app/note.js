@@ -9,10 +9,13 @@ renderNotes(notes, filters);
 // listen to create new note
 document.querySelector('#create-note').addEventListener('click', function(e) {
   const id = uuid();
+  const timestamp = moment().valueOf();
   notes.push({
     id: id,
     title: '',
-    body: ''
+    body: '',
+    createdAt: timestamp,
+    updatedAt: timestamp
   });
   saveNote(notes);
   // renderNotes(notes, filters);

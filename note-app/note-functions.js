@@ -64,3 +64,8 @@ const renderNotes = function(notes, filter) {
     document.querySelector('#notes').appendChild(paragraph);
   });
 };
+
+// Generate last edited date
+const generateLastEdited = function(timestamp) {
+  return `Last edited ${moment(timestamp).fromNow()}`;
+};
