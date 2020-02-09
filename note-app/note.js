@@ -1,7 +1,8 @@
 let notes = getSavedNotes();
 
 const filters = {
-  searchText: ''
+  searchText: '',
+  sortBy: 'byEdited'
 };
 
 renderNotes(notes, filters);
@@ -34,7 +35,8 @@ document.querySelector('#note-form').addEventListener('submit', function(e) {
 });
 
 document.querySelector('#filter-by').addEventListener('change', function(e) {
-  console.log(e.target.value);
+  filters.sortBy = e.target.value;
+  renderNotes(notes, filters);
 });
 
 // handle for localStorage data change
