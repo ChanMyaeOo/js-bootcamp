@@ -8,7 +8,7 @@ const filters = {
 renderNotes(notes, filters);
 
 // listen to create new note
-document.querySelector('#create-note').addEventListener('click', function(e) {
+document.querySelector('#create-note').addEventListener('click', e => {
   const id = uuid();
   const timestamp = moment().valueOf();
   notes.push({
@@ -23,24 +23,24 @@ document.querySelector('#create-note').addEventListener('click', function(e) {
   location.assign(`/edit.html#${id}`);
 });
 
-document.querySelector('#search-note').addEventListener('input', function(e) {
+document.querySelector('#search-note').addEventListener('input', e => {
   filters.searchText = e.target.value;
   renderNotes(notes, filters);
 });
 
-document.querySelector('#note-form').addEventListener('submit', function(e) {
+document.querySelector('#note-form').addEventListener('submit', e => {
   e.preventDefault();
   console.log(e.target.elements.noteInput.value);
   e.target.elements.noteInput.value = '';
 });
 
-document.querySelector('#filter-by').addEventListener('change', function(e) {
+document.querySelector('#filter-by').addEventListener('change', e => {
   filters.sortBy = e.target.value;
   renderNotes(notes, filters);
 });
 
 // handle for localStorage data change
-window.addEventListener('storage', function(e) {
+window.addEventListener('storage', e => {
   if (e.key === 'notes') {
     notes = JSON.parse(e.newValue);
     renderNotes(notes, filters);

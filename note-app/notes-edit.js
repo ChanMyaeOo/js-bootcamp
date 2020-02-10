@@ -5,9 +5,7 @@ const dateElement = document.querySelector('#last-updated-text');
 const noteId = location.hash.substring(1);
 let notes = getSavedNotes();
 
-let note = notes.find(function(note) {
-  return note.id === noteId;
-});
+let note = notes.find(note => note.id === noteId);
 
 if (note === undefined) {
   location.assign('/index.html');
@@ -18,7 +16,7 @@ bodyElement.value = note.body;
 // to show last edited time
 dateElement.textContent = generateLastEdited(note.updatedAt);
 
-titleElement.addEventListener('input', function(e) {
+titleElement.addEventListener('input', e => {
   //   console.log(e.target.value);
   note.title = e.target.value;
   note.updatedAt = moment().valueOf();
@@ -26,26 +24,24 @@ titleElement.addEventListener('input', function(e) {
   saveNote(notes);
 });
 
-bodyElement.addEventListener('input', function(e) {
+bodyElement.addEventListener('input', e => {
   note.body = e.target.value;
   note.updatedAt = moment().valueOf();
   dateElement.textContent = generateLastEdited(note.updatedAt);
   saveNote(notes);
 });
 
-removeElement.addEventListener('click', function(e) {
+removeElement.addEventListener('click', e => {
   removeNote(note.id);
   saveNote(notes);
   location.assign('/index.html');
 });
 
-window.addEventListener('storage', function(e) {
+window.addEventListener('storage', e => {
   if (e.key === 'notes') {
     notes = JSON.parse(e.newValue);
 
-    note = notes.find(function(note) {
-      return note.id === noteId;
-    });
+    note = notes.find(note => note.id === noteId);
 
     if (note === undefined) {
       location.assign('/index.html');
