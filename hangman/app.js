@@ -1,5 +1,5 @@
 const hangman1 = new Hangman('car parks', 2);
-const hangman2 = new Hangman('country', 2);
+// const hangman2 = new Hangman('country', 2);
 
 const puzzleEl = document.querySelector('#puzzle');
 const guessCountEl = document.querySelector('#guessCount');
