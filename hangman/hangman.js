@@ -77,87 +77,40 @@ class Hangman {
   }
 }
 
-getRequest('2')
-  .then(puzzle => {
-    console.log(puzzle);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-
-// testing
-// const request = new XMLHttpRequest();
-
-// request.addEventListener('readystatechange', e => {
-//   if (e.target.readyState === 4) {
-//     const puzzle = JSON.parse(e.target.responseText);
+// getRequest('2')
+//   .then(puzzle => {
 //     console.log(puzzle);
-//   }
-// });
-
-// request.open('GET', 'http://puzzle.mead.io/puzzle');
-// request.send();
-
-// testing restcountries.eu
-
-// const request = new XMLHttpRequest();
-
-// request.addEventListener('readystatechange', e => {
-//   if (e.target.readyState === 4 && e.target.status === 200) {
-//     const countryCode = 'MM';
-//     const data = JSON.parse(e.target.responseText);
-
-//     const countryData = data.find(
-//       country => country.alpha2Code === countryCode
-//     );
-//     console.log(countryData.name);
-//   }
-// });
-
-// request.open('GET', 'http://restcountries.eu/rest/v2/all');
-// request.send();
-
-getCountryData('MM')
-  .then(country => {
-    console.log(country.name);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-
-// fetch('http://puzzle.mead.io/puzzle', {})
-//   .then(response => {
-//     if (response.status === 200) {
-//       return response.json();
-//     } else {
-//       throw new Error('Unable to fetch puzzle');
-//     }
-//   })
-//   .then(data => {
-//     console.log(`Fetch API data: ${data.puzzle}`);
 //   })
 //   .catch(err => {
 //     console.log(err);
 //   });
 
-getLocation()
-  .then(data => {
-    console.log(
-      `You are currently in ${data.city} ${data.region} ${data.country}!`
-    );
-    return getCountryData(data.country);
-  })
-  .then(data => {
-    console.log(`Result from promise chaning : ${data.name}`);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+// getCountryData('MM')
+//   .then(country => {
+//     console.log(country.name);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
 
-getCurrentCountry()
-  .then(data => {
-    console.log(data.name);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+// getLocation()
+//   .then(data => {
+//     console.log(
+//       `You are currently in ${data.city} ${data.region} ${data.country}!`
+//     );
+//     return getCountryData(data.country);
+//   })
+//   .then(data => {
+//     console.log(`Result from promise chaning : ${data.name}`);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+// getCurrentCountry()
+//   .then(data => {
+//     console.log(data.name);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
