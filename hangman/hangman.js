@@ -77,13 +77,13 @@ class Hangman {
   }
 }
 
-getRequest('2', (error, puzzle) => {
-  if (error) {
-    console.log(`Error: ${error}`);
-  } else {
+getRequest('2')
+  .then(puzzle => {
     console.log(puzzle);
-  }
-});
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 // testing
 // const request = new XMLHttpRequest();
@@ -117,10 +117,47 @@ getRequest('2', (error, puzzle) => {
 // request.open('GET', 'http://restcountries.eu/rest/v2/all');
 // request.send();
 
-getCountryData('MM', (error, country) => {
-  if (error) {
-    console.log(`Error: ${error}`);
-  } else {
+getCountryData('MM')
+  .then(country => {
     console.log(country.name);
-  }
-});
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+// fetch('http://puzzle.mead.io/puzzle', {})
+//   .then(response => {
+//     if (response.status === 200) {
+//       return response.json();
+//     } else {
+//       throw new Error('Unable to fetch puzzle');
+//     }
+//   })
+//   .then(data => {
+//     console.log(`Fetch API data: ${data.puzzle}`);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+getLocation()
+  .then(data => {
+    console.log(
+      `You are currently in ${data.city} ${data.region} ${data.country}!`
+    );
+    return getCountryData(data.country);
+  })
+  .then(data => {
+    console.log(`Result from promise chaning : ${data.name}`);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+getCurrentCountry()
+  .then(data => {
+    console.log(data.name);
+  })
+  .catch(err => {
+    console.log(err);
+  });
