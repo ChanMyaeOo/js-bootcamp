@@ -4,27 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Note App</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="icon" href="./images/favicon.png" />
+    <title>Notes App</title>
   </head>
   <body>
-    <h1>Note App</h1>
-    <h2>Write note NOT to forget.</h2>
-    <input id="search-note" type="text" placeholder="Filter notes ..." />
-    <select id="filter-by">
-      <option value="byEdited">Sort by last edited</option>
-      <option value="byCreated">Sort by recently created</option>
-      <option value="byAlphabetical">Sory by alphabetically</option>
-    </select>
-    <div id="notes"></div>
-    <button id="create-note">Create note</button>
-    <form id="note-form">
-      <input type="text" placeholder="Enter something ..." name="noteInput" />
-      <button>Submit</button>
-    </form>
+    <header class="header">
+      <div class="container">
+        <h1 class="header__title">Note App</h1>
+        <h2 class="header__subtitle">Write note and never forget</h2>
+      </div>
+    </header>
 
-    <script src="uuid.js"></script>
+    <div class="actions">
+      <div class="actions__container">
+        <input
+          id="search-note"
+          class="input"
+          type="text"
+          placeholder="Filter notes ..."
+        />
+        <select id="filter-by" class="dropdown">
+          <option value="byEdited">Sort by last edited</option>
+          <option value="byCreated">Sort by recently created</option>
+          <option value="byAlphabetical">Sory by alphabetically</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="notes"></div>
+      <button id="create-note" class="button">Create note</button>
+    </div>
+
+    <script src="./scripts/uuid.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-    <script src="note-functions.js"></script>
-    <script src="note.js"></script>
+    <script src="./scripts/note-functions.js"></script>
+    <script src="./scripts/note.js"></script>
   </body>
 </html>

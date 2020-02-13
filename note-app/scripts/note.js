@@ -23,17 +23,13 @@ document.querySelector('#create-note').addEventListener('click', e => {
   location.assign(`/edit.html#${id}`);
 });
 
+// listen to filter note
 document.querySelector('#search-note').addEventListener('input', e => {
   filters.searchText = e.target.value;
   renderNotes(notes, filters);
 });
 
-document.querySelector('#note-form').addEventListener('submit', e => {
-  e.preventDefault();
-  console.log(e.target.elements.noteInput.value);
-  e.target.elements.noteInput.value = '';
-});
-
+// listen to sort note
 document.querySelector('#filter-by').addEventListener('change', e => {
   filters.sortBy = e.target.value;
   renderNotes(notes, filters);
