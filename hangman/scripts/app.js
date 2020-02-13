@@ -12,8 +12,16 @@ window.addEventListener('keypress', e => {
 });
 
 const render = () => {
-  puzzleEl.textContent = hangman1.puzzle;
+  puzzleEl.innerHTML = '';
   guessCountEl.textContent = hangman1.statusMessage;
+
+  // console.log(hangman1.puzzle.split(''));
+  const puzzleArr = hangman1.puzzle.split('');
+  puzzleArr.forEach(letter => {
+    const span = document.createElement('span');
+    span.textContent = letter;
+    puzzleEl.appendChild(span);
+  });
 };
 
 const startGame = async () => {
