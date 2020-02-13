@@ -16,14 +16,18 @@ document.querySelector('#search-todo').addEventListener('input', e => {
 // listen for todo form submit
 document.querySelector('#todo-form').addEventListener('submit', e => {
   e.preventDefault();
-  todos.push({
-    id: uuid(),
-    text: e.target.elements.todoInput.value,
-    completed: false
-  });
-  saveTodos(todos);
-  renderTodos(todos, filters);
-  e.target.elements.todoInput.value = '';
+  const inputValidate = e.target.elements.todoInput.value.trim();
+
+  if (inputValidate.length > 0) {
+    todos.push({
+      id: uuid(),
+      text: inputValidate,
+      completed: false
+    });
+    saveTodos(todos);
+    renderTodos(todos, filters);
+    e.target.elements.todoInput.value = '';
+  }
 });
 
 // listen for hide completed checkbox

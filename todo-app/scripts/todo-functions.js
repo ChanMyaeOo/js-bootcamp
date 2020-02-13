@@ -34,13 +34,14 @@ const toggleTodo = id => {
 
 // Generate todo DOM
 const generateTodoDOM = todo => {
-  const todoEl = document.createElement('div');
+  const todoEl = document.createElement('label');
+  const containerEl = document.createElement('div');
   const removeTodoBtn = document.createElement('button');
   const toggleCheckbox = document.createElement('input');
 
   // Setup checkbox to each todo
   toggleCheckbox.setAttribute('type', 'checkbox');
-  todoEl.appendChild(toggleCheckbox);
+  containerEl.appendChild(toggleCheckbox);
 
   // Handle checkbox toggle
   toggleCheckbox.checked = todo.completed;
@@ -53,10 +54,16 @@ const generateTodoDOM = todo => {
   // Setup note
   const paragraph = document.createElement('span');
   paragraph.textContent = todo.text;
-  todoEl.appendChild(paragraph);
+  containerEl.appendChild(paragraph);
+
+  // Setup container
+  todoEl.classList.add('list-item');
+  containerEl.classList.add('list-item__container');
+  todoEl.appendChild(containerEl);
 
   // Setup remove note button
-  removeTodoBtn.textContent = 'x';
+  removeTodoBtn.textContent = 'remove';
+  removeTodoBtn.classList.add('button', 'button--text');
   todoEl.appendChild(removeTodoBtn);
 
   // Handle remove note
@@ -72,12 +79,16 @@ const generateTodoDOM = todo => {
 // Generate DOM elements for todo summary
 const generateSummaryDOM = uncompletedTodos => {
   const todoSummary = document.createElement('h3');
-  todoSummary.textContent = `You have ${uncompletedTodos.length} todos left`;
+  todoSummary.classList.add('list-title');
+  let plural = uncompletedTodos.length === 1 ? '' : 's';
+
+  todoSummary.textContent = `You have ${uncompletedTodos.length} todo${plural} left`;
   return todoSummary;
 };
 
 // Render application's todos
 const renderTodos = (todos, filter) => {
+  const todosEl = document.querySelector('#todos');
   const filteredTodos = todos.filter(function(todo) {
     // debugger;
     const isSearchTextMatch = todo.text
@@ -90,13 +101,18 @@ const renderTodos = (todos, filter) => {
   const uncompletedTodos = filteredTodos.filter(todo => !todo.completed);
 
   // clear todo container (#todos) before rendering filtered todos
-  document.querySelector('#todos').innerHTML = '';
+  todosEl.innerHTML = '';
 
-  document
-    .querySelector('#todos')
-    .appendChild(generateSummaryDOM(uncompletedTodos));
+  todosEl.appendChild(generateSummaryDOM(uncompletedTodos));
 
-  filteredTodos.forEach(todo => {
-    document.querySelector('#todos').appendChild(generateTodoDOM(todo));
-  });
+  if (filteredTodos.length > 0) {
+    filteredTodos.forEach(todo => {
+      todosEl.appendChild(generateTodoDOM(todo));
+    });
+  } else {
+    const emptyMsg = document.createElement('p');
+    emptyMsg.textContent = 'No todos to show';
+    emptyMsg.classList.add('empty-message');
+    todosEl.appendChild(emptyMsg);
+  }
 };
